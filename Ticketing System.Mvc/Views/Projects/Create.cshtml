@@ -1,0 +1,227 @@
+﻿@model Ticketing_System.Mvc.Models.CreateProjectModel
+
+@{
+
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+
+<script src="~/Scripts/PageLevel Scripts/Proejct.js"></script>
+
+
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<div id="page-wrapper">
+    <div class="col-lg-12">
+        <h5 class="pull-right"> Dashboard - > Projects -> Create Project</h5>
+    </div>
+    <script src="~/Scripts/validation.js"></script>
+    <script src="~/Scripts/Validations.js"></script>
+    <div class="row">
+        <div class="col-lg-12">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Create Project</h4>
+                    <hr />
+                    @Html.HiddenFor(model => model.UserIds)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(model => model.Description, 6, 47, new { htmlAttributes = new { @class = "form-control", width = "100%" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Short Name</label>
+                            @*@Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Duration(in days)</label>
+                            @*@Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Duration, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Project Manager</label>
+                            @*@Html.LabelFor(model => model.ProjectManager, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.PManagerID, Model.ClientsDDl, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PManagerID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Client</label>
+                            @*@Html.LabelFor(model => model.Client, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.ClientID, Model.ClientsDDl, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ClientID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">SignUp Date</label>
+                            @*@Html.LabelFor(model => model.SignUpDate, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.SignUpDate, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SignUpDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Start Date</label>
+                            @*@Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Proposed EndDate</label>
+                            @*@Html.LabelFor(model => model.ProposedEndDate, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.ProposedEndDate, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ProposedEndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Users List</label>
+                            @*@Html.LabelFor(model => model.UsersList, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                            <div class="col-md-9">
+                                <input id="myAutocomplete" type="text" />
+                                <input id="myAutocompleteValues" type="text" />
+                                @foreach (SelectListItem si in Model.UsersList)
+                                {
+                                    @Html.CheckBox(@si.Text, false, new { userid = @si.Value })@si.Text<br />
+                                }
+                            </div>
+                            <script src="/Content/js/jquery-ui.min.js"></script>
+                            <script src="/Content/js/jquery.autocomplete.multiselect.js"></script> 
+                            <link rel="stylesheet" type="text/css" href="/Content/css/jquery-ui.css" />
+                            <script>
+                                $(function () {
+                                    var users = @Html.Raw(Json.Encode(Model.UsersList))
+                                    var availableTags = new Array();
+                                    $.each(users, function (idx, ele) {
+                                        var autoV = { key: ele.Value, value: ele.Text }
+                                        availableTags[idx] = autoV;
+                                    });
+                                    function split(val) {
+                                        return val.split(/,\s*/);
+                                    }
+                                    function extractLast(term) {
+                                        return split(term).pop();
+                                    }
+                                    var selectedItems= [];
+                                    $('#myAutocomplete').bind("blur", function(event) {
+                                        //var $autoCompleteInstance = $(this).autocomplete("instance");
+                                        var selectedObjects = [], currentText = $(this).html();
+                                        //if ($autoCompleteInstance.term !== undefined && $autoCompleteInstance.term !== "") {
+                                        if (currentText !== undefined && currentText !== "") {
+                                            $.each(currentText.split(","), function(index, currentValue) {
+                                                var temp = $.grep(sourceList, function(current) {
+                                                    return current.name === currentValue.trim();
+                                                });
+                                                $.merge(selectedObjects, temp);
+                                            });
+                                            selectedItems = selectedObjects;
+                                            var valueField = [], textField = [];
+                                            $.each(selectedItems, function(i, e) { valueField.push(e.valueField) }); //Resource_Id
+                                            $.each(selectedItems, function(i, e) { textField.push(e.textField) });
+                                            this.value = valueField.join(", ");
+                                            $(this).attr("value", valueField.join(", "));
+                                            this.innerHTML = textField.length > 0 ? textField.join(", ") + ", " : "";
+                                            alert(selectedItems);
+                                        }
+                                        else {
+                                            this.innerHTML = this.value = ""; $(this).attr("value", "");
+                                            selectedItems = [];
+                                        }
+                                    }).autocomplete({
+                                        multiselect: true,
+                                        minLength: 0,
+                                        source: function( request, response ) {
+                                            // delegate back to autocomplete, but extract the last term
+                                            response( $.ui.autocomplete.filter(
+                                                availableTags, extractLast( request.term ) ) );
+                                        },
+                                        focus: function () {
+                                            // prevent value inserted on focus
+                                            return false;
+                                        },
+                                        select: function (event, ui) {
+                                            var terms = split(this.value);
+                                            // remove the current input
+                                            terms.pop();
+                                            // add the selected item
+                                            terms.push(ui.item.value);
+                                            // add placeholder to get the comma-and-space at the end
+                                            terms.push("");
+                                            this.value = terms.join(", ");
+                                            
+                                            
+                                            var values = split($('#myAutocompleteValues').val());
+                                            // remove the current input
+                                            values.pop();
+                                            // add the selected item
+                                            values.push(ui.item.key);
+                                            // add placeholder to get the comma-and-space at the end
+                                            values.push("");
+                                            $('#myAutocompleteValues').val(values.join(", "));
+                                            $('#myAutocomplete').focus();
+                                            return false;
+                                        }
+                                    });
+                                })
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Create" class="btn btn-info btn-block" />
+                                @if (ViewBag.Message != null)
+                                {
+                                    <label class="text-info">@ViewBag.Message</label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#SignUpDate,#StartDate,#ProposedEndDate').datepicker({
+            format: "mm/dd/yyyy"
+        });
+    });
+</script>
